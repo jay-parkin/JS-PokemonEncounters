@@ -1,0 +1,114 @@
+/* General page styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  margin: 0;
+  padding-top: 80px; /* Add padding to prevent content from being hidden behind the buttons */
+}
+
+/* Style for the button container at the top */
+.fixed-buttons {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 2px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  z-index: 1000; /* Ensure the buttons are on top of everything */
+}
+
+/* Style for buttons */
+button {
+  background-color: #ffcb05;
+  border: none;
+  color: #2a75bb;
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #ffdb4d;
+}
+
+/* Container for Pokémon cards */
+#pokemonEncounterArea {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Style for each Pokémon card */
+.pokemonCardEntry {
+  background-color: #fff;
+  border: 2px solid #2a75bb;
+  border-radius: 10px;
+  width: 220px;
+  margin: 15px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.pokemonCardEntry img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.pokemonCardEntry h1 {
+  font-size: 24px;
+  text-transform: capitalize;
+  margin: 10px 0;
+  color: #2a75bb;
+}
+
+.pokemonCardEntry h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.pokemonCardEntry ul {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 15px;
+}
+
+.pokemonCardEntry li {
+  font-size: 16px;
+  margin: 5px 0;
+  text-transform: capitalize;
+  color: #333;
+}
+
+/* Style for the 'Play Sound' button inside the card */
+.pokemonCardEntry button {
+  background-color: #2a75bb;
+  color: #fff;
+  padding: 8px 15px;
+  font-size: 14px;
+  margin: 0;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.pokemonCardEntry button:hover {
+  background-color: #3e8ed0;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 600px) {
+  .pokemonCardEntry {
+    width: 100%;
+    margin: 10px 0;
+  }
+}

@@ -8,7 +8,6 @@ function renderPokemonData(pokemonData) {
   // pokemonRenderArea.innerText += pokemonData.name;
 
   /*
-
 	<div>
 		<img src="" />
 		<h1>Pikachu</h1>
@@ -20,9 +19,7 @@ function renderPokemonData(pokemonData) {
 		</ul>
 		<button>Play Cry</button>
 	</div>
-
 	*/
-
   let pokemonContainerDiv = document.createElement("div");
   pokemonContainerDiv.classList += "pokemonCardEntry";
 
@@ -38,7 +35,7 @@ function renderPokemonData(pokemonData) {
   pokemonTypesHeading.innerText = "Types:";
   pokemonContainerDiv.appendChild(pokemonTypesHeading);
 
-  let pokemoneTypeList = document.createElement("ul");
+  let pokemonTypeList = document.createElement("ul");
   pokemonData.types.forEach((typeObject) => {
     // PokemonData.types is an array
     // need to make one li element per type
@@ -46,19 +43,18 @@ function renderPokemonData(pokemonData) {
 
     let pokemonTypeListItem = document.createElement("li");
     pokemonTypeListItem.innerText = typeObject.type.name;
-    pokemoneTypeList.appendChild(pokemonTypeListItem);
+    pokemonTypeList.appendChild(pokemonTypeListItem);
   });
-
-  pokemonContainerDiv.appendChild(pokemoneTypeList);
+  pokemonContainerDiv.appendChild(pokemonTypeList);
 
   let pokemonAudioButton = document.createElement("button");
-  pokemonAudioButton.innerText = "Play Cry";
+  pokemonAudioButton.innerText = "Play Sound";
   pokemonAudioButton.addEventListener("click", () => {
     let pokemonAudioObject = new Audio(pokemonData.sound);
     pokemonAudioObject.play();
   });
-
   pokemonContainerDiv.appendChild(pokemonAudioButton);
+
   pokemonRenderArea.appendChild(pokemonContainerDiv);
 }
 
@@ -95,6 +91,7 @@ let encounterButton = document.getElementById("pokemonEncounterButton");
 // encounterButton.addEventListener("click", getPokemon);
 // encounterButton.addEventListener("click", (event) => getPokemon(event));
 encounterButton.addEventListener("click", async (event) => {
+  pokemonRenderArea.innerText = "";
   console.log("Some block of code in the event listener");
 
   let pokemonResult = await getPokemon();
@@ -102,4 +99,42 @@ encounterButton.addEventListener("click", async (event) => {
   console.log(pokemonResult);
 
   renderPokemonData(pokemonResult);
+});
+
+let encounterGroupButton = document.getElementById("pokemonGroupEncounter");
+
+encounterGroupButton.addEventListener("click", async () => {
+  pokemonRenderArea.innerText = "";
+
+  // let pokemonResult1 = await getPokemon();
+  // renderPokemonData(pokemonResult1);
+  // let pokemonResult2 = await getPokemon();
+  // renderPokemonData(pokemonResult2);
+  // let pokemonResult3 = await getPokemon();
+  // renderPokemonData(pokemonResult3);
+  // let pokemonResult4 = await getPokemon();
+  // renderPokemonData(pokemonResult4);
+  // let pokemonResult5 = await getPokemon();
+  // renderPokemonData(pokemonResult5);
+  // let pokemonResult6 = await getPokemon();
+  // renderPokemonData(pokemonResult6);
+
+  let multiplePokemonResult = await Promise.all([
+    getPokemon(),
+    getPokemon(),
+    getPokemon(),
+    getPokemon(),
+    getPokemon(),
+    getPokemon(),
+  ]);
+
+  console.log(multiplePokemonResult);
+
+  multiplePokemonResult.forEach(renderPokemonData);
+
+  // multiplePokemonResult.forEach((pokemonResult) => renderPokemonData(pokemonResult));
+
+  // multiplePokemonResult.forEach((pokemonResult) => {
+  // 	renderPokemonData(pokemonResult)
+  // });
 });
