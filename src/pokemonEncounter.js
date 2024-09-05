@@ -1,3 +1,9 @@
+let pokemonRenderArea = document.getElementById("pokemonEncounterArea");
+
+function renderPokemonData(pokemonData) {
+  pokemonRenderArea.innerText = pokemonData.name;
+}
+
 async function getPokemon() {
   console.log("Getting Pokemon now!");
 
@@ -26,5 +32,7 @@ let encounterButton = document.getElementById("pokemonEncounterButton");
 encounterButton.addEventListener("click", async (event) => {
   console.log("Some block of code in the event listener");
   let pokemonResult = await getPokemon();
+
+  renderPokemonData(pokemonResult);
   console.log(pokemonResult);
 });
