@@ -1,7 +1,70 @@
 let pokemonRenderArea = document.getElementById("pokemonEncounterArea");
 
 function renderPokemonData(pokemonData) {
-  pokemonRenderArea.innerText = pokemonData.name;
+  if (!pokemonData.name) {
+    return;
+  }
+
+  // pokemonRenderArea.innerText += pokemonData.name;
+
+  /*
+
+	<div>
+		<img src="" />
+		<h1>Pikachu</h1>
+		<h3>Types:</h3>
+		<ul>
+			<li>
+				Electric
+			</li>
+		</ul>
+		<button>Play Cry</button>
+	</div>
+
+	*/
+
+  let pokemonContainerDiv = document.createElement("div");
+  pokemonContainerDiv.classList += "pokemonCardEntry";
+
+  let pokemonImage = document.createElement("img");
+  pokemonImage.src = pokemonData.image;
+  pokemonContainerDiv.appendChild(pokemonImage);
+
+  let pokemonHeading = document.createElement("h1");
+  pokemonHeading.innerText = pokemonData.name;
+  pokemonContainerDiv.appendChild(pokemonHeading);
+
+  let pokemonTypesHeading = document.createElement("h3");
+  pokemonTypesHeading.innerText = "Types:";
+  pokemonContainerDiv.appendChild(pokemonTypesHeading);
+
+  let pokemoneTypeList = document.createElement("ul");
+  pokemonData.types.forEach((typeObject) => {
+    // PokemonData.types is an array
+    // need to make one li element per type
+    // and append that to the ul element
+
+    let pokemonTypeListItem = document.createElement("li");
+    pokemonTypeListItem.innerText = typeObject.type.name;
+    pokemoneTypeList.appendChild(pokemonTypeListItem);
+  });
+
+  pokemonContainerDiv.appendChild(pokemoneTypeList);
+
+  let pokemonAudioButton = document.createElement("button");
+  pokemonAudioButton.innerText = "Play Cry";
+  pokemonAudioButton.addEventListener("click", () => {
+    let pokemonAudioObject = new Audio(pokemonData.sound);
+    pokemonAudioObject.play();
+  });
+
+  pokemonContainerDiv.appendChild(pokemonAudioButton);
+  pokemonRenderArea.appendChild(pokemonContainerDiv);
+}
+
+function getRandomPokemonId() {
+  // Random number between 1 and 1025 inclusive
+  return Math.floor(Math.random() * 1025) + 1;
 }
 
 async function getPokemon() {
@@ -9,7 +72,9 @@ async function getPokemon() {
 
   // Hardcoded for development, replace "pikachu" with a random number
   // random number is ID from 1 to 1025
-  let apiResponse = await fetch("https://pokeapi.co/api/v2/pokemon/pikachu");
+  let apiResponse = await fetch(
+    "https://pokeapi.co/api/v2/pokemon/" + getRandomPokemonId()
+  );
   let apiData = await apiResponse.json();
 
   // console.log(apiData);
@@ -31,8 +96,10 @@ let encounterButton = document.getElementById("pokemonEncounterButton");
 // encounterButton.addEventListener("click", (event) => getPokemon(event));
 encounterButton.addEventListener("click", async (event) => {
   console.log("Some block of code in the event listener");
+
   let pokemonResult = await getPokemon();
 
-  renderPokemonData(pokemonResult);
   console.log(pokemonResult);
+
+  renderPokemonData(pokemonResult);
 });
