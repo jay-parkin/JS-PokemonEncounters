@@ -60,7 +60,7 @@ function renderPokemonData(pokemonData) {
 
 function getRandomPokemonId() {
   // Random number between 1 and 1025 inclusive
-  return Math.floor(Math.random() * 1025) + 1;
+  return Math.floor(Math.random() * 25) + 25;
 }
 
 async function getPokemon() {
