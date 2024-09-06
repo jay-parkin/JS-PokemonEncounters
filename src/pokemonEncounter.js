@@ -58,9 +58,13 @@ function renderPokemonData(pokemonData) {
   pokemonRenderArea.appendChild(pokemonContainerDiv);
 }
 
+function getPikachu() {
+return 25;
+}
+
 function getRandomPokemonId() {
   // Random number between 1 and 1025 inclusive
-  return Math.floor(Math.random() * 25) + 25;
+  return Math.floor(Math.random() * 1025) + 1;
 }
 
 async function getPokemon() {
